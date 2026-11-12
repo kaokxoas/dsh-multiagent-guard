@@ -89,8 +89,8 @@ ctx.subagents.interrupt(childId, { kind: 'ancestor', agent: parentAgent })
 ### 方式一：Release tarball（推荐，公开只读）
 
 ```bash
-# 在 profile 目录执行（Desktop 首次启动后生成）
-cd ~/.dsh/profiles
+# 在 profile 目录执行（Desktop 首次启动后生成；目录名按你的实际 profile）
+cd ~/.dsh/profiles/desktop
 
 # pnpm 直接吃 https tarball，无需登录
 pnpm add https://github.com/kaokxoas/dsh-multiagent-guard/releases/download/v0.1.0/dsh-multiagent-guard-0.1.0.tgz
@@ -99,7 +99,7 @@ pnpm add https://github.com/kaokxoas/dsh-multiagent-guard/releases/download/v0.1
 然后把包名加进 `dsh.profile.bundles`：
 
 ```jsonc
-// ~/.dsh/profiles/package.json
+// ~/.dsh/profiles/desktop/package.json
 "dsh": { "profile": { "bundles": [ /* ... 已有项 ..., */ "dsh-multiagent-guard" ] } }
 ```
 
