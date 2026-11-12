@@ -1,0 +1,56 @@
+{
+  "name": "dsh-multiagent-guard",
+  "version": "0.1.0",
+  "description": "多 agent 协作硬约束：只读角色工具级白名单、上下文预算标记、子 agent 超时真中断、协作度量",
+  "keywords": [
+    "deepseek-harness",
+    "dsh",
+    "dsh-plugin",
+    "dsh-bundle",
+    "multi-agent",
+    "subagent",
+    "guard",
+    "tool-guard"
+  ],
+  "type": "module",
+  "main": "./lib/index.js",
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "kaokxoas",
+    "email": "2563948706@qq.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaokxoas/dsh-multiagent-guard.git"
+  },
+  "homepage": "https://github.com/kaokxoas/dsh-multiagent-guard#readme",
+  "bugs": {
+    "url": "https://github.com/kaokxoas/dsh-multiagent-guard/issues"
+  },
+  "engines": {
+    "dsh": ">=0.2.2-rc.1"
+  },
+  "peerDependencies": {
+    "cordis": ">=4.0.0-rc <5"
+  },
+  "peerDependenciesMeta": {
+    "cordis": {
+      "optional": true
+    }
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# 构建产物与依赖
+node_modules/
+*.tsbuildinfo
+*.tgz
+
+# 本地备份
+_bak-*/
