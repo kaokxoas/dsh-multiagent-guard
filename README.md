@@ -84,19 +84,46 @@ ctx.subagents.interrupt(childId, { kind: 'ancestor', agent: parentAgent })
 
 ## 安装
 
-### 作为 bundle 装配（推荐）
+包未发布到 npm registry，从 GitHub Release 的 tarball 或仓库直接装配。
+
+### 方式一：Release tarball（推荐，公开只读）
 
 ```bash
-# 在 profile 目录下
-dsh plugin add dsh-multiagent-guard
+# 在 profile 目录执行（Desktop 首次启动后生成）
+cd ~/.dsh/profiles
+
+# pnpm 直接吃 https tarball，无需登录
+pnpm add https://github.com/kaokxoas/dsh-multiagent-guard/releases/download/v0.1.0/dsh-multiagent-guard-0.1.0.tgz
 ```
 
-或手工两步：
+然后把包名加进 `dsh.profile.bundles`：
 
-1. 把本包放进 profile 的 `node_modules/`（或建 junction）；
-2. `package.json` 的 `dsh.profile.bundles` 数组加入 `"dsh-multiagent-guard"`。
+```jsonc
+// ~/.dsh/profiles/package.json
+"dsh": { "profile": { "bundles": [ /* ... 已有项 ..., */ "dsh-multiagent-guard" ] } }
+```
 
-`cordis.patch.yml` 会把它 insert 进 loader：
+重启 DSH 后 `cordis.patch.yml` 里的 insert 生效。
+
+### 方式二：从仓库 clone
+
+```bash
+git clone https://github.com/kaokxoas/dsh-multiagent-guard.git
+cd dsh-multiagent-guard
+```
+
+再按方式一的两步装配（`pnpm add <本地绝对路径>` 代替 tarball URL）。
+
+### 方式三：本地开发态
+
+```bash
+# 需装 dsh-super-injector；在会话里执行（不写 profile）：
+dev_inject_plugin <本目录绝对路径>
+```
+
+开发态走运行时注入，不进 `dsh.profile.bundles`，插件管理页看不到它。
+
+装配后 `cordis.patch.yml` 里的 insert 进入 loader：
 
 ```yaml
 - insert:
@@ -105,15 +132,6 @@ dsh plugin add dsh-multiagent-guard
       config: {}
 ```
 
-### 本地开发态
-
-```bash
-# 有 dsh-super-injector 时，热注入（免重启）
-# 注入器环境内执行：
-dev_inject_plugin <本目录绝对路径>
-```
-
----
 
 ## 配置
 
@@ -168,3 +186,7 @@ dev_inject_plugin <本目录绝对路径>
 ## License
 
 MIT
+
+---
+
+[![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
